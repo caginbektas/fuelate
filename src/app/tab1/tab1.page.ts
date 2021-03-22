@@ -35,7 +35,7 @@ export class Tab1Page {
         this.statistics.totalFuelCost = this.getTotalFuelCost().toFixed(0);
         this.statistics.totalLiters = this.getTotalLiters().toFixed(0);
         this.statistics.avgCityDrive = this.getAvgCityDrive();
-        this.statistics.fuelEfficiency = this.fuelLogs.map(a => a.litersPerHundredKm);
+        this.statistics.fuelEfficiency = this.fuelLogs.sort((a, b) => (a.date > b.date) ? 1 : -1).map(a => a.litersPerHundredKm);
 
         this.doughnutChartMethod();
         this.lineChartMethod();
@@ -104,7 +104,6 @@ export class Tab1Page {
   }
   lineChartMethod() {
     let labels = Array(this.statistics.fuelEfficiency.length).fill('.')
-debugger;
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
       type: 'line',
       data: {
