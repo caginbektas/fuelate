@@ -6,4 +6,6 @@ export class FuelLog{
     liter: number;
     total: number;
     cityPercentage: number;
+    distance: number;
+    litersPerHundredKm: number;
 }

@@ -16,14 +16,16 @@ export class Tab2Page {
   fuelLog: FuelLog = new FuelLog();
   ionViewDidEnter(){
     this.getFuelLogs().subscribe(records => {
-      if (records && records.length > 0)
+      if (records && records.length > 0){
+        records = records.sort((a, b) => (a.date < b.date) ? 1 : -1);
         this.fuelLog.lastOdometer = records[0].odometer;
+      }
     });
   }
  
   getFuelLogs(){
     return this.afs.collection('FuelLog').valueChanges().pipe() as Observable<FuelLog[]>
-    }
+  }
   
   async saveAlert(){
     const alert = await this.alertController.create({
@@ -48,17 +50,21 @@ export class Tab2Page {
   }
 
   async saveFuelLog(){
+    let totalDistance = (this.fuelLog.odometer & this.fuelLog.lastOdometer) ? Number(this.fuelLog.odometer - this.fuelLog.lastOdometer) : 0;
+    let lperkm = this.fuelLog.liter ? Number(this.fuelLog.liter / totalDistance * 100) : 0;
+    let totalCost = this.fuelLog.liter & this.fuelLog.costPerLiters ? Number(this.fuelLog.liter * this.fuelLog.costPerLiters) : 0
     debugger;
     this.afs.collection('FuelLog').add({
-        cityPercentage: this.fuelLog.cityPercentage ? this.fuelLog.cityPercentage : 0,
-        costPerLiters: this.fuelLog.costPerLiters,
-        lastOdometer: this.fuelLog.lastOdometer ? this.fuelLog.lastOdometer : 0,
+        cityPercentage: this.fuelLog.cityPercentage ? Number(this.fuelLog.cityPercentage.toFixed(2)) : 0,
+        costPerLiters: this.fuelLog.costPerLiters ? Number(this.fuelLog.costPerLiters.toFixed(2)) : 0,
+        lastOdometer: this.fuelLog.lastOdometer ? Number(this.fuelLog.lastOdometer) : 0,
         date: Date.now(),
-        liter: this.fuelLog.liter,
-        odometer: this.fuelLog.odometer,
-        total: this.fuelLog.liter*this.fuelLog.costPerLiters
+        liter: this.fuelLog.liter ? Number(this.fuelLog.liter) : 0,
+        odometer: this.fuelLog.odometer ? Number(this.fuelLog.odometer.toFixed(2)) : 0,
+        total: Number(totalCost.toFixed(2)),
+        distance: Number(totalDistance.toFixed(2)),
+        litersPerHundredKm: Number(lperkm.toFixed(2))
       });
     this.fuelLog = new FuelLog();
   }
-
 }
