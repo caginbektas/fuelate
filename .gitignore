@@ -31,3 +31,4 @@ firebase.json
 /platforms
 /plugins
 /www
+/src/environments/environment.ts
