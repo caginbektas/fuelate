@@ -110,7 +110,7 @@ export class Tab1Page {
         labels: labels,
         datasets: [
           {
-            label: 'Sell per week',
+            label: 'l/100km',
             fill: false,
             lineTension: 0.1,
             backgroundColor: 'rgba(75,192,192,0.4)',
