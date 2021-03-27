@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { FuelLog } from '../entity/FuelLogEntity';
 import { map, tap} from 'rxjs/operators';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -11,7 +12,7 @@ import { map, tap} from 'rxjs/operators';
 })
 export class Tab2Page {
 
-  constructor(private alertController: AlertController, private afs: AngularFirestore) {}
+  constructor(private alertController: AlertController, private afs: AngularFirestore, private router: Router) {}
 
   fuelLog: FuelLog = new FuelLog();
   ionViewDidEnter(){
@@ -65,5 +66,6 @@ export class Tab2Page {
         litersPerHundredKm: Number(lperkm.toFixed(2))
       });
     this.fuelLog = new FuelLog();
+    this.router.navigateByUrl('/tabs/tab1', {replaceUrl: true});
   }
 }
