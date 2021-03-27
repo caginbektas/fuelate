@@ -19,6 +19,7 @@
                   <h4><b>Efficiency:</b> {{fuelLog.litersPerHundredKm}} l/100km</h4>
                   <h4><b>Cost:</b> {{fuelLog.total}}</h4>
                 </ion-label>
+                <ion-icon class="icon-red" name="close-circle" (click)=removeLogAlert(fuelLog.date) ></ion-icon>
 
         </ion-item>
       </ion-list>    
