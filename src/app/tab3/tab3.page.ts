@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FuelLog } from '../entity/FuelLogEntity';
@@ -12,7 +12,7 @@ import { FuelLog } from '../entity/FuelLogEntity';
 })
 export class Tab3Page {
 
-  constructor(private afs: AngularFirestore, private alertController: AlertController) {}
+  constructor(private afs: AngularFirestore, private alertController: AlertController, private toastController: ToastController) {}
   fuelLogs: FuelLog[] = [];
 
   getFuelLogs(){
@@ -53,10 +53,20 @@ export class Tab3Page {
   this.afs.collection("FuelLog").doc(timeStamp.toString()).delete().then(() => {
     console.log(timeStamp)
     console.log(timeStamp.toString())
+    this.presentToast("Log successfully deleted!", 1000);
+      console.log("Document successfully deleted!");
+    }).catch((error) => {
+      console.error("Error removing document: ", error);
+      this.presentToast("Error removing Log: " + error, 1000);
+    });
+  }
 
-    console.log("Document successfully deleted!");
-  }).catch((error) => {
-    console.error("Error removing document: ", error);
-  });
+  async presentToast(message: string, duration: number) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: duration,
+      position: "bottom"
+    });
+    toast.present();
   }
 }

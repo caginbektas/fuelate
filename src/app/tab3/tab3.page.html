@@ -7,22 +7,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
+  <ion-card *ngFor="let fuelLog of fuelLogs">
     <ion-card-content>
-      <ion-list lines="full" class="ion-no-margin">
-        <ion-item *ngFor="let fuelLog of fuelLogs">
-
                 <ion-label>
-                  <h2>{{fuelLog.date | date: 'dd/MM/yyy'}}</h2>
+                  <h2 align="right"><b>{{fuelLog.date | date: 'dd/MM/yyy'}}</b></h2>
                   <h4><b>Distance:</b> {{fuelLog.distance}} KM</h4>
                   <h4><b>Filled:</b> {{fuelLog.liter}} liters</h4>
                   <h4><b>Efficiency:</b> {{fuelLog.litersPerHundredKm}} l/100km</h4>
                   <h4><b>Cost:</b> {{fuelLog.total}}</h4>
+                  <ion-button size="small" (click)=removeLogAlert(fuelLog.date)><ion-icon name="trash-outline"></ion-icon></ion-button>
                 </ion-label>
-                <ion-icon class="icon-red" name="close-circle" (click)=removeLogAlert(fuelLog.date) ></ion-icon>
-
-        </ion-item>
-      </ion-list>    
     </ion-card-content>
   </ion-card>
 </ion-content>

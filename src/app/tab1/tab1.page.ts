@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { FuelLog } from '../entity/FuelLogEntity';
 import { Statistics } from '../entity/Statistics';
 import { Chart } from 'chart.js';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -12,7 +13,7 @@ import { Chart } from 'chart.js';
 })
 export class Tab1Page {
 
-  constructor(private afs: AngularFirestore) {}
+  constructor(private afs: AngularFirestore, public loadingController: LoadingController) {}
   @ViewChild('doughnutCanvas') private doughnutCanvas: ElementRef;
   @ViewChild('lineCanvas') private lineCanvas: ElementRef;
 
@@ -22,7 +23,13 @@ export class Tab1Page {
   fuelLogs: FuelLog[] = [];
   statistics: Statistics = new Statistics();
 
-  ionViewDidEnter(){
+  chartVisible = 0;
+
+  async ionViewDidEnter(){
+    this.chartVisible = 0
+    const loading = await this.loadingController.create();
+    await loading.present();
+
     this.getFuelLogs().subscribe(records => {
       if (records && records.length > 1){
         this.fuelLogs = records.sort((a, b) => (a.date > b.date) ? 1 : -1);
@@ -40,6 +47,8 @@ export class Tab1Page {
         this.doughnutChartMethod();
         this.lineChartMethod();
 
+        this.chartVisible = 1;
+        loading.dismiss();
       }
     });
   }

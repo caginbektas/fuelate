@@ -66,6 +66,6 @@ export class Tab2Page {
         litersPerHundredKm: Number(lperkm.toFixed(2))
       });
     this.fuelLog = new FuelLog();
-    this.router.navigateByUrl('/tabs/tab1', {replaceUrl: true});
+    this.router.navigateByUrl('/tabs/tab1');
   }
 }
