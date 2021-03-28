@@ -51,14 +51,14 @@ export class Tab2Page {
   }
 
   async saveFuelLog(){
-    let totalDistance = (this.fuelLog.odometer & this.fuelLog.lastOdometer) ? Number(this.fuelLog.odometer - this.fuelLog.lastOdometer) : 0;
+    let totalDistance = (this.fuelLog.odometer && this.fuelLog.lastOdometer) ? Number(this.fuelLog.odometer - this.fuelLog.lastOdometer) : 0;
     let lperkm = this.fuelLog.liter ? Number(this.fuelLog.liter / totalDistance * 100) : 0;
-    let totalCost = this.fuelLog.liter & this.fuelLog.costPerLiters ? Number(this.fuelLog.liter * this.fuelLog.costPerLiters) : 0
-    this.afs.collection('FuelLog').doc(Date.now().toString()).set({
+    let totalCost = (this.fuelLog.liter && this.fuelLog.costPerLiters) ? Number(this.fuelLog.liter * this.fuelLog.costPerLiters) : 0
+    let stamp = Date.now().toString();
+    this.afs.collection('FuelLog').doc(stamp).set({
         cityPercentage: this.fuelLog.cityPercentage ? Number(this.fuelLog.cityPercentage.toFixed(2)) : 0,
-        costPerLiters: this.fuelLog.costPerLiters ? Number(this.fuelLog.costPerLiters.toFixed(2)) : 0,
         lastOdometer: this.fuelLog.lastOdometer ? Number(this.fuelLog.lastOdometer) : 0,
-        date: Date.now(),
+        date: stamp,
         liter: this.fuelLog.liter ? Number(this.fuelLog.liter) : 0,
         odometer: this.fuelLog.odometer ? Number(this.fuelLog.odometer.toFixed(2)) : 0,
         total: Number(totalCost.toFixed(2)),

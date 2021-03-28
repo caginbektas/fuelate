@@ -50,6 +50,7 @@ export class Tab1Page {
         this.chartVisible = 1;
         loading.dismiss();
       }
+      loading.dismiss();
     });
   }
  
