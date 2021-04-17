@@ -113,11 +113,10 @@ export class Tab1Page {
     });
   }
   lineChartMethod() {
-    let labels = Array(this.statistics.fuelEfficiency.length).fill('.')
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
       type: 'line',
       data: {
-        labels: labels,
+        labels: this.getLabels(),
         datasets: [
           {
             label: 'l/100km',
@@ -144,5 +143,18 @@ export class Tab1Page {
         ]
       }
     });
+  }
+
+  getLabels(){
+    let labels = Array(this.statistics.fuelEfficiency.length).fill('.')
+    if(labels && labels.length > 0){
+        labels[0] = this.getDate(this.fuelLogs[0].date)
+        labels[labels.length-1] = this.getDate(this.fuelLogs[this.fuelLogs.length-1].date)
+    }
+    return labels;
+  }
+
+  getDate(timestamp: any){
+    return new Date(Number(timestamp)).toLocaleDateString();
   }
 }
