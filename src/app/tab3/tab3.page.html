@@ -15,6 +15,8 @@
                   <h4><b>Filled:</b> {{fuelLog.liter}} liters</h4>
                   <h4><b>Efficiency:</b> {{fuelLog.litersPerHundredKm}} l/100km</h4>
                   <h4><b>Cost:</b> {{fuelLog.total}}</h4>
+                  <h4><b>l/km:</b> {{calculateLiterKmPerL(fuelLog.distance, fuelLog.liter)}} </h4>
+                  <h4><b>250km/l:</b> {{calculateLPer250Km(fuelLog.distance, fuelLog.liter)}} </h4>
                   <ion-button size="small" (click)=removeLogAlert(fuelLog.date)><ion-icon name="trash-outline"></ion-icon></ion-button>
                 </ion-label>
     </ion-card-content>

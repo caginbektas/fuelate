@@ -69,4 +69,12 @@ export class Tab3Page {
     });
     toast.present();
   }
+
+  calculateLiterKmPerL(totalKM: number, totalFuel: number): string{
+    return (totalKM/totalFuel).toFixed(2)
+  }
+
+  calculateLPer250Km(totalKm: number, totalFuel: number): string{
+     return (totalFuel*250/totalKm).toFixed(2);
+  }
 }
