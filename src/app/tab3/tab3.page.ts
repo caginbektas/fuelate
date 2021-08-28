@@ -22,7 +22,6 @@ export class Tab3Page {
   ionViewDidEnter(){
     this.getFuelLogs().subscribe(records => {
       if (records && records.length > 1){
-        records.shift();
         this.fuelLogs = records.sort((a, b) => (a.date < b.date) ? 1 : -1);
       }
     });

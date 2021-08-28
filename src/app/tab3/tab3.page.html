@@ -12,55 +12,55 @@
                 <ion-label>
                   <h2 align="right"><b>{{fuelLog.date | date: 'dd/MM/yyy'}}</b></h2>
                   <ion-row>
-                    <ion-col class="bold" size="6">
+                    <ion-col class="bold" size="5">
                       Distance
                     </ion-col>
-                    <ion-col size="6">
+                    <ion-col size="7">
                       {{fuelLog.distance}} km
                     </ion-col>
                   </ion-row>
 
                   <ion-row class="bottomRow">
-                    <ion-col class="bold" size="6">
+                    <ion-col class="bold" size="5">
                       Fuel
                     </ion-col>
-                    <ion-col size="6">
+                    <ion-col size="7">
                       {{fuelLog.liter}} liters
                     </ion-col>
                   </ion-row>
 
                   <ion-row class="bottomRow">
-                    <ion-col class="bold" size="6">
+                    <ion-col class="bold" size="5">
                       Efficiency
                     </ion-col>
-                    <ion-col size="6">
+                    <ion-col size="7">
                       {{fuelLog.litersPerHundredKm}} l/100km
                     </ion-col>
                   </ion-row>
 
                   <ion-row class="bottomRow">
-                    <ion-col class="bold" size="6">
+                    <ion-col class="bold" size="5">
                       Cost
                     </ion-col>
-                    <ion-col size="6">
+                    <ion-col size="7">
                       {{fuelLog.total}} 
                     </ion-col>
                   </ion-row>
 
                   <ion-row class="bottomRow">
-                    <ion-col class="bold" size="6">
+                    <ion-col class="bold" size="5">
                       l/km
                     </ion-col>
-                    <ion-col size="6">
+                    <ion-col size="7">
                       {{calculateLiterKmPerL(fuelLog.distance, fuelLog.liter)}} km
                     </ion-col>
                   </ion-row>
 
                   <ion-row class="bottomRow">
-                    <ion-col class="bold" size="6">
+                    <ion-col class="bold" size="5">
                       250km/l
                     </ion-col>
-                    <ion-col size="6">
+                    <ion-col size="7">
                       {{calculateLPer250Km(fuelLog.distance, fuelLog.liter)}} l
                     </ion-col>
                   </ion-row>

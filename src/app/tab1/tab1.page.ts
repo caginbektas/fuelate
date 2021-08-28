@@ -33,7 +33,6 @@ export class Tab1Page {
     this.getFuelLogs().subscribe(records => {
       if (records && records.length > 1){
         this.fuelLogs = records.sort((a, b) => (a.date > b.date) ? 1 : -1);
-        this.fuelLogs = this.fuelLogs.slice(1, this.fuelLogs.length);
 
         this.statistics.totalKM = this.getTotalKM().toFixed(0);
         this.statistics.avgLPerHundredKm = this.getavgLPerHundredKm().toFixed(1);
